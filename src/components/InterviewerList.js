@@ -5,14 +5,14 @@ import "components/InterviewerList.scss";
 export default function InterviewerList(props) {
   
   let InterviewersArray = props.interviewers.map(i => {
-    if (props.setInterviewer) {
+    if (props.onChange) {
       return (
         <InterviewerListItem
           key={i.id}
           name={i.name}
           avatar={i.avatar}
-          selected={i.id===props.interviewer}
-          setInterviewer={() => props.setInterviewer(i.id)}
+          selected={i.id === props.value}
+          setInterviewer={() => props.onChange(i.id)}
         />
       );
     } else {
@@ -21,7 +21,7 @@ export default function InterviewerList(props) {
           key={i.id}
           name={i.name}
           avatar={i.avatar}
-          selected={i.id===props.interviewer}
+          selected={i.id===props.value}
         />
       );
     }
