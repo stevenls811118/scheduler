@@ -8,7 +8,6 @@ export default function Button(props) {
     "button--danger": props.danger,
   });
 
-  console.log(buttonClass);
   return (
     <button
       className={buttonClass}
