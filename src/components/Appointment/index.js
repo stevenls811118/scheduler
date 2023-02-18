@@ -19,7 +19,9 @@ export default function Appointment(props) {
       {mode === SHOW &&
         <>
           <Header time={props.time}/>
-          <Show student={props.interview.student} interviewer={props.interview.interviewer.name}/>
+          <Show 
+            student={props.interview.student} 
+            interviewer={props.interview.interviewer.name}/>
         </>     
       }
       {mode === EMPTY &&
@@ -31,7 +33,7 @@ export default function Appointment(props) {
       {mode === CREATE &&
         <>
           <Form 
-            interviewers={[]} 
+            interviewers={props.interviewers} 
             onCancel={() => transition(EMPTY)}
             onSave={() => transition(SHOW)}
           />
