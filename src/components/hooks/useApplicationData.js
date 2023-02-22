@@ -30,14 +30,18 @@ const useApplicationData = () => {
     const appointments = {...state.appointments, [id]: appointment};
     
     return axios.put(`http://localhost:8001/api/appointments/${id}`, {interview})
-    .then((res) => setState({...state, appointments}));
+    .then((res) => setState({...state, appointments}))
+    .then(() => axios.get(`http://localhost:8001/api/days`))
+    .then((res) => setState(prev => ({...prev, days: res.data})));
   };
 
   const cancelInterview = (id) => {
     const appointment = {...state.appointments[id], interview: null};
     const appointments = {...state.appointments, [id]: appointment};
     return axios.delete(`http://localhost:8001/api/appointments/${id}`)
-    .then((res) => setState({...state, appointments}));
+    .then((res) => setState({...state, appointments}))
+    .then(() => axios.get(`http://localhost:8001/api/days`))
+    .then((res) => setState(prev => ({...prev, days: res.data})));
   };
 
   return {state, setDay, bookInterview, cancelInterview};
