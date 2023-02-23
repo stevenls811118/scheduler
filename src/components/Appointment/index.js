@@ -71,7 +71,7 @@ export default function Appointment(props) {
           />     
         </>     
       }
-      {mode === EMPTY &&
+      {mode === EMPTY && props.interview === null &&
         <>
           <Header time={props.time}/>
           <Empty onAdd={() => transition(CREATE)}/>
@@ -80,7 +80,8 @@ export default function Appointment(props) {
       {mode === CREATE &&
         <>
           <Form 
-            interviewers={props.interviewers} 
+            interviewers={props.interviewers}
+            interviewer={props.interviewers[0].id}
             onCancel={back}
             onSave={save}
           />

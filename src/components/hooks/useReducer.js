@@ -1,5 +1,6 @@
 import { useEffect, useReducer }from "react";
 import axios from "axios";
+
 const W3CWebSocket = require('websocket').w3cwebsocket;
 
 
@@ -47,6 +48,19 @@ function reducer(state, action) {
     ws.onopen = function() {
       console.log('WebSocket Client Connected');
       ws.send('ping');
+    };
+
+    ws.onmessage = function(e) {
+      if (typeof e.data === 'string') {
+        let respondAction = JSON.parse(e.data);
+        dispatch({type: SET_INTERVIEW, id: respondAction.id, interview: respondAction.interview});
+        axios.get(`http://localhost:8001/api/days`)
+        .then((res) => dispatch({type: SET_DAYS, days: res.data}));  
+      }
+    };
+
+    ws.onclose = function() {
+      console.log('echo-protocol Client Closed');
     };
 
     Promise.all([
