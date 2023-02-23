@@ -33,11 +33,46 @@ npm test
 ```sh
 npm run storybook
 ```
+## API server/*Database Setup
+For full functionality both must run concurrently: the client and the API server applications.
+
+- Start by forking and cloning the scheduler-api server here
+- Follow the steps outlined in README to install and setup the database
+- Fork and clone this repo
+- Navigate to the root directory and install dependencies with npm install
+- Once you have the database setup and the scheduler-api server running, run the following command from the root directory of the project npm start
+
 ## Final Product
 
 ### Home Page
-!["final-product-gif"](/docs/final-product.gif)
-### Add TODO
-!["final-product-gif-2](/docs/final-product-add.gif)
-### Delete TODO
-!["final-product-gif-3](/docs/final-product-delete.gif)
+!["final product"](/public/images/Final%20product.PNG)
+### Create Appointment
+!["Create Appointment"](/public/images/Create%20appointment.gif)
+### Edit Appointment
+!["Edit Appointment"](/public/images/Edit%20appointment.gif)
+### Delete Appointment
+!["Delete Appointment"](/public/images/Delete%20appointment.gif)
+### WebSocket Server Feature
+!["WebSocket Server Feature"](/public/images/Websocket%20server%20feature.gif)
+
+## Dependencies
+
+  - axios
+  - classnames
+  - normalize.css
+  - react
+  - react-dom
+  - react-scripts
+  - websocket
+  - @babel/core
+  - @storybook/addon-actions
+  - @storybook/addon-backgrounds
+  - @storybook/addon-links
+  - @storybook/addons
+  - @storybook/react
+  - @testing-library/jest-dom
+  - @testing-library/react
+  - @testing-library/react-hooks
+  - babel-loader
+  - react-test-renderer
+  - sass
