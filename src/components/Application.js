@@ -3,11 +3,12 @@ import "components/Application.scss";
 import DayList from "./DayList";
 import Appointment from "./Appointment";
 import {getAppointmentsForDay, getInterview, getInterviewersForDay} from "helpers/selectors";
-import useApplicationData from "./hooks/useApplicationData";
+// import useApplicationData from "./hooks/useApplicationData";
+import useReducerForApplicationData from "./hooks/useReducer";
 
 export default function Application(props) {
 
-  const {state, setDay, bookInterview, cancelInterview} = useApplicationData();
+  const {state, setDay, bookInterview, cancelInterview} = useReducerForApplicationData();
 
   const interviewersForDay = getInterviewersForDay(state, state.day);
   let dailyAppointmentsArray = getAppointmentsForDay(state, state.day).map(i => {
