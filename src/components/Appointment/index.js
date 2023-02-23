@@ -58,7 +58,6 @@ export default function Appointment(props) {
     transition(EDIT);
   }
 
-  console.log(props.id);
   return (
     <article className="appointment">
       {mode === SHOW && props.interview &&
