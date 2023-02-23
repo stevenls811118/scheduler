@@ -27,7 +27,7 @@ export default function Application(props) {
     );
   });
   
-  dailyAppointmentsArray = [...dailyAppointmentsArray, <Appointment key="last" time="5pm" />];
+  dailyAppointmentsArray = [...dailyAppointmentsArray, <Appointment id="last" time="5pm" />];
 
   return (
     <main className="layout">

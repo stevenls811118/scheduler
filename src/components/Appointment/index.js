@@ -58,6 +58,7 @@ export default function Appointment(props) {
     transition(EDIT);
   }
 
+  console.log(props.id);
   return (
     <article className="appointment">
       {mode === SHOW && props.interview &&
@@ -75,6 +76,11 @@ export default function Appointment(props) {
         <>
           <Header time={props.time}/>
           <Empty onAdd={() => transition(CREATE)}/>
+        </>  
+      }
+      {props.id === "last" &&
+        <>
+          <Header time={props.time}/>
         </>  
       }
       {mode === CREATE &&
