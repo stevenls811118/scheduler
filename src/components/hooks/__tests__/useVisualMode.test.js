@@ -20,19 +20,19 @@ test("useVisualMode should transition to another mode", () => {
 
 test("useVisualMode should return to previous mode", () => {
   const { result } = renderHook(() => useVisualMode(FIRST));
-  console.log("1st history and mode", result.current.history, result.current.mode);
+  
   act(() => result.current.transition(SECOND));
   expect(result.current.mode).toBe(SECOND);
-  console.log("2nd history and mode", result.current.history, result.current.mode);
+  
   act(() => result.current.transition(THIRD));
   expect(result.current.mode).toBe(THIRD);
-  console.log("3rd history and mode", result.current.history, result.current.mode);
+  
   act(() => result.current.back());
   expect(result.current.mode).toBe(SECOND);
-  console.log("4th history and mode", result.current.history, result.current.mode);
+  
   act(() => result.current.back());
   expect(result.current.mode).toBe(FIRST);
-  console.log("5th history and mode", result.current.history, result.current.mode);
+  
 });
 
 test("useVisualMode should not return to previous mode if already at initial", () => {
@@ -40,27 +40,26 @@ test("useVisualMode should not return to previous mode if already at initial", (
 
   act(() => result.current.back());
   expect(result.current.mode).toBe(FIRST);
-  console.log("history and mode", result.current.history, result.current.mode);
-
+  
   act(() => result.current.back());
   expect(result.current.mode).toBe(FIRST);
 
-  console.log("final history and mode", result.current.history, result.current.mode);
+  
 });
 
 test("useVisualMode should replace the current mode", () => {
   const { result } = renderHook(() => useVisualMode(FIRST));
-  console.log("1st history and mode", result.current.history, result.current.mode);
+  
 
   act(() => result.current.transition(SECOND));
   expect(result.current.mode).toBe(SECOND);
-  console.log("2nd history and mode", result.current.history, result.current.mode);
+  
   // Passing "true" to transition(THIRD, true) says "Transition to THIRD by REPLACING SECOND"
   act(() => result.current.transition(THIRD, true));
   expect(result.current.mode).toBe(THIRD);
-  console.log("3rd history and mode", result.current.history, result.current.mode);
+  
 
   act(() => result.current.back());
   expect(result.current.mode).toBe(FIRST);
-  console.log("4th history and mode", result.current.history, result.current.mode);
+  
 });
