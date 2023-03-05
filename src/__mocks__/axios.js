@@ -91,5 +91,23 @@ export default {
         statusText: "No Content",
       });
     }
+
+    if (url === `http://localhost:8001/api/appointments/2`) {
+      fixtures.days[0].spots = 1;
+      return Promise.resolve({
+        status: 204,
+        statusText: "No Content",
+      });
+    }
+  }),
+
+  delete: jest.fn(url => {
+    if (url === `http://localhost:8001/api/appointments/2`) {
+      fixtures.days[0].spots = 2;
+      return Promise.resolve({
+        status: 204,
+        statusText: "No Content",
+      });
+    }
   })
 };
