@@ -3,16 +3,15 @@ import InterviewerList from "components/InterviewerList";
 import React, { useState } from "react";
 
 export default function Form(props) {
-
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const reset = () => {
     setStudent("");
     setInterviewer(null);
-    setError('');
-  }
+    setError("");
+  };
 
   const cancel = () => {
     reset();
@@ -32,14 +31,14 @@ export default function Form(props) {
       setError("Please select an interviewer");
       return;
     }
-    setError('');
+    setError("");
     props.onSave(student, interviewer);
   }
 
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
-        <form autoComplete="off" onSubmit={e => e.preventDefault()}>
+        <form autoComplete="off" onSubmit={(e) => e.preventDefault()}>
           <input
             className="appointment__create-input text--semi-bold"
             name="name"
@@ -51,7 +50,7 @@ export default function Form(props) {
           />
         </form>
         <section className="appointment__validation">{error}</section>
-        <InterviewerList 
+        <InterviewerList
           onChange={setInterviewer}
           interviewers={props.interviewers}
           value={interviewer}
@@ -59,9 +58,12 @@ export default function Form(props) {
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
-          <Button danger onClick={cancel}>Cancel</Button>
-          <Button confirm onClick={() => validate()}
-          >Save</Button>
+          <Button danger onClick={cancel}>
+            Cancel
+          </Button>
+          <Button confirm onClick={() => validate()}>
+            Save
+          </Button>
         </section>
       </section>
     </main>

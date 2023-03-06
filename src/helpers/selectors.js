@@ -17,7 +17,7 @@ const getInterviewersForDay = (state, day) => {
     const interviewersArray = state.days.filter((i) => i.name === day);
     if (interviewersArray.length !== 0) {
       const result = Object.values(state.interviewers).filter((i) =>
-      interviewersArray[0].interviewers.includes(i.id)
+        interviewersArray[0].interviewers.includes(i.id)
       );
       return result;
     }

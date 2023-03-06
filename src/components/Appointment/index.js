@@ -20,8 +20,9 @@ const ERROR_SAVE = "ERROR_SAVE";
 const ERROR_DELETE = "ERROR_DELETE";
 
 export default function Appointment(props) {
-  
-  const {mode, transition, back} = useVisualMode(props.interview ? SHOW : EMPTY);
+  const { mode, transition, back } = useVisualMode(
+    props.interview ? SHOW : EMPTY
+  );
 
   useEffect(() => {
     if (props.interview && mode === EMPTY) {
@@ -35,12 +36,13 @@ export default function Appointment(props) {
   const save = (name, interviewer) => {
     const interview = {
       student: name,
-      interviewer
+      interviewer,
     };
-    transition(SAVING)
-    props.bookInterview(props.id, interview)
-    .then(() => transition(SHOW))
-    .catch(error => transition(ERROR_SAVE, true));
+    transition(SAVING);
+    props
+      .bookInterview(props.id, interview)
+      .then(() => transition(SHOW))
+      .catch((error) => transition(ERROR_SAVE, true));
   };
 
   const confirm = () => {
@@ -49,82 +51,67 @@ export default function Appointment(props) {
 
   const cancel = () => {
     transition(DELETING, true);
-    props.cancelInterview(props.id)
-    .then(() => transition(EMPTY))
-    .catch(error => transition(ERROR_DELETE, true));
+    props
+      .cancelInterview(props.id)
+      .then(() => transition(EMPTY))
+      .catch((error) => transition(ERROR_DELETE, true));
   };
 
   const edit = () => {
     transition(EDIT);
-  }
+  };
 
   return (
     <article className="appointment" data-testid="appointment">
-      {mode === SHOW && props.interview &&
+      {mode === SHOW && props.interview && (
         <>
-          <Header time={props.time}/>
-          <Show 
-            student={props.interview.student} 
+          <Header time={props.time} />
+          <Show
+            student={props.interview.student}
             interviewer={props.interview.interviewer.name}
             onDelete={confirm}
             onEdit={edit}
-          />     
-        </>     
-      }
-      {mode === EMPTY && props.interview === null &&
+          />
+        </>
+      )}
+      {mode === EMPTY && props.interview === null && (
         <>
-          <Header time={props.time}/>
-          <Empty onAdd={() => transition(CREATE)}/>
-        </>  
-      }
-      {props.id === "last" &&
+          <Header time={props.time} />
+          <Empty onAdd={() => transition(CREATE)} />
+        </>
+      )}
+      {props.id === "last" && (
         <>
-          <Header time={props.time}/>
-        </>  
-      }
-      {mode === CREATE &&
+          <Header time={props.time} />
+        </>
+      )}
+      {mode === CREATE && (
         <>
-          <Form 
+          <Form
             interviewers={props.interviewers}
             onCancel={back}
             onSave={save}
           />
         </>
-      }
-      {mode === SAVING &&
-        <Status message="Saving"/>
-      }
-      {mode === DELETING &&
-        <Status message="Deleting"/>
-      }
-      {mode === CONFIRM &&
-        <Confirm 
-          onConfirm={cancel}
-          onCancel={back}
-        />
-      }
-      {mode === EDIT &&
-        <Form 
+      )}
+      {mode === SAVING && <Status message="Saving" />}
+      {mode === DELETING && <Status message="Deleting" />}
+      {mode === CONFIRM && <Confirm onConfirm={cancel} onCancel={back} />}
+      {mode === EDIT && (
+        <Form
           student={props.interview.student}
           interviewer={props.interview.interviewer.id}
-          interviewers={props.interviewers} 
+          interviewers={props.interviewers}
           onCancel={back}
           onSave={save}
         />
-      }
-      {mode === ERROR_SAVE &&
-        <Error 
-          message="Could not save appointment."
-          onClose={back}
-        />
-      }
-      {mode === ERROR_DELETE &&
-        <Error 
-          message="Could not delete appointment."
-          onClose={back}
-        />
-      }
-
+      )}
+      {mode === ERROR_SAVE && (
+        <Error message="Could not save appointment." onClose={back} />
+      )}
+      {mode === ERROR_DELETE && (
+        <Error message="Could not delete appointment." onClose={back} />
+      )}
     </article>
   );
 }
