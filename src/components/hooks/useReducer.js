@@ -50,6 +50,7 @@ const useReducerForApplicationData = () => {
   const setDay = (day) => dispatch({ type: SET_DAY, day });
 
   useEffect(() => {
+    // websocket feature
     const ws = new W3CWebSocket(
       process.env.REACT_APP_WEBSOCKET_URL,
       "echo-protocol"
@@ -82,6 +83,7 @@ const useReducerForApplicationData = () => {
       console.log("echo-protocol Client Closed");
     };
 
+    // use axios to get data from api server and set state
     Promise.all([
       axios.get(`/api/days`),
       axios.get(`/api/appointments`),
@@ -98,6 +100,7 @@ const useReducerForApplicationData = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  // book interview with put request then get days from api server to update the remaining spots
   const bookInterview = (id, interview) => {
     return axios
       .put(`/api/appointments/${id}`, { interview })
@@ -106,6 +109,7 @@ const useReducerForApplicationData = () => {
       .then((res) => dispatch({ type: SET_DAYS, days: res.data }));
   };
 
+  // cancel interview with delete request then get days from api server to update remaining spots
   const cancelInterview = (id) => {
     return axios
       .delete(`/api/appointments/${id}`)

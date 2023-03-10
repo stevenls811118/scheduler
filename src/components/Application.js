@@ -10,6 +10,7 @@ import {
 import useReducerForApplicationData from "./hooks/useReducer";
 
 export default function Application(props) {
+  // destructure from custom hook
   const { state, setDay, bookInterview, cancelInterview } =
     useReducerForApplicationData();
 
