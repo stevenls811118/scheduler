@@ -36,7 +36,7 @@ npm run storybook
 ## API server/*Database Setup
 For full functionality both must run concurrently: the client and the API server applications.
 
-- Start by forking and cloning the scheduler-api server here
+- Start by forking and cloning the scheduler-api server [here](https://github.com/lighthouse-labs/scheduler-api) 
 - Follow the steps outlined in README to install and setup the database
 - Fork and clone this repo
 - Navigate to the root directory and install dependencies with npm install

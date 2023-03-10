@@ -73,7 +73,7 @@ const useReducerForApplicationData = () => {
           interview: respondAction.interview,
         });
         axios
-          .get(`http://localhost:8001/api/days`)
+          .get(`/api/days`)
           .then((res) => dispatch({ type: SET_DAYS, days: res.data }));
       }
     };
@@ -83,9 +83,9 @@ const useReducerForApplicationData = () => {
     };
 
     Promise.all([
-      axios.get(`http://localhost:8001/api/days`),
-      axios.get(`http://localhost:8001/api/appointments`),
-      axios.get(`http://localhost:8001/api/interviewers`),
+      axios.get(`/api/days`),
+      axios.get(`/api/appointments`),
+      axios.get(`/api/interviewers`),
     ])
       .then((res) => {
         dispatch({
@@ -100,17 +100,17 @@ const useReducerForApplicationData = () => {
 
   const bookInterview = (id, interview) => {
     return axios
-      .put(`http://localhost:8001/api/appointments/${id}`, { interview })
+      .put(`/api/appointments/${id}`, { interview })
       .then((res) => dispatch({ type: SET_INTERVIEW, id, interview }))
-      .then(() => axios.get(`http://localhost:8001/api/days`))
+      .then(() => axios.get(`/api/days`))
       .then((res) => dispatch({ type: SET_DAYS, days: res.data }));
   };
 
   const cancelInterview = (id) => {
     return axios
-      .delete(`http://localhost:8001/api/appointments/${id}`)
+      .delete(`/api/appointments/${id}`)
       .then((res) => dispatch({ type: SET_INTERVIEW, id, interview: null }))
-      .then(() => axios.get(`http://localhost:8001/api/days`))
+      .then(() => axios.get(`/api/days`))
       .then((res) => dispatch({ type: SET_DAYS, days: res.data }));
   };
 
