@@ -95,9 +95,24 @@ export default function Appointment(props) {
           />
         </>
       )}
-      {mode === SAVING && <Status message="Saving" />}
-      {mode === DELETING && <Status message="Deleting" />}
-      {mode === CONFIRM && <Confirm onConfirm={cancel} onCancel={back} />}
+      {mode === SAVING && (
+        <>
+          <Header time={props.time} />
+          <Status message="Saving" />
+        </>
+      )}
+      {mode === DELETING && (
+        <>
+          <Header time={props.time} />
+          <Status message="Deleting" />
+        </>
+      )}
+      {mode === CONFIRM && (
+        <>
+          <Header time={props.time} />
+          <Confirm onConfirm={cancel} onCancel={back} />
+        </>
+      )}
       {mode === EDIT && (
         <>
           <Header time={props.time} />
@@ -111,10 +126,16 @@ export default function Appointment(props) {
         </>
       )}
       {mode === ERROR_SAVE && (
-        <Error message="Could not save appointment." onClose={back} />
+        <>
+          <Header time={props.time} />
+          <Error message="Could not save appointment." onClose={back} />
+        </>
       )}
       {mode === ERROR_DELETE && (
-        <Error message="Could not delete appointment." onClose={back} />
+        <>
+          <Header time={props.time} />
+          <Error message="Could not delete appointment." onClose={back} />
+        </>
       )}
     </article>
   );
